@@ -1,0 +1,13 @@
+---
+local-url: registry.sulamerica.br:4000
+images:
+  #jboss-eap-6/eap64-openshift:
+  #  remote-url: registry.access.redhat.com
+  #jboss-eap-7/eap70-openshift:
+  #  remote-url: registry.access.redhat.com
+  #openshift3/image-inspector:
+  #  remote-url: registry.access.redhat.com
+  #openshift3/jenkins-1-rhel7:
+  #  remote-url: registry.access.redhat.com
+  openshift3/openvswitch:
+    remote-url: registry.access.redhat.com

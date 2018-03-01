@@ -1,0 +1,95 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import os
+import yaml
+import sys
+import getopt
+from classes.docker import Docker
+import threading
+
+def local_help():
+  print "Docker Registry Synchronizer version 0.0.1"
+  print "sync-registry --conf-file=<config-file-path> [ Loads the configuration file <yaml file> to sync a private registry from a public registry ]"
+  print "sync-registry --help [ This help ]"
+  exit(0)
+
+def process_image(image):
+
+  bufferofimgs = []
+  tags = []
+
+  docker = Docker(properties['images'][image]['remote-url'], properties['local-url'], image)
+ 
+  url = properties['images'][image]['remote-url']
+  version = properties['images'][image]['version']
+  data = docker.getTags(url, version)
+ 
+  print ("[%s] Processing URL %s" % (image, url.rstrip(os.linesep)))
+
+  try:
+    for key, value in data.iteritems():
+      tags.append(key)
+  except:
+    print "url: %s - image: %s" % (url,image)
+    print data
+    exit
+
+  tags.sort()
+  
+  tagnum = 0 
+  numoftags = len(tags)
+
+  for tag in tags: 
+    print("[%s:%s] <%s of %s> Attempt to fetch image" % (image, tag, (tagnum+1), numoftags))
+    docker.setCurrentTag(tag)
+    response = docker.imageExists(tag)
+    if(not response):
+      print("[%s:%s] <%s of %s> fetching image" % (image, tag, (tagnum+1), numoftags))
+      if(docker.fetchImage()):
+        print "[%s:%s] <%s of %s> An error ocurred fetching image" % (image, tag, (tagnum+1), numoftags)
+        exit()
+      print "[%s:%s] <%s of %s> tagging image to the local repository: %s" % (image, tag, (tagnum+1), numoftags, properties['local-url'].rstrip(os.linesep))
+      if(docker.setTagImage()):
+        print "[%s:%s] <%s of %s> An error ocurred tagging image to the local repository" % (image, tag, (tagnum+1), numoftags, properties['local-url'].rstrip(os.linesep))
+        exit()
+      print "[%s:%s] <%s of %s> uploading image to the local repository: %s" % (image, tag, (tagnum+1), numoftags, properties['local-url'].rstrip(os.linesep))
+      if(docker.uploadImage()):
+        print "[%s:%s] <%s of %s> An error ocurred uploading image to the local repository" % (image, tag, (tagnum+1), numoftags)
+        exit()
+      print "[%s:%s] <%s of %s> Image successfully uploaded" % (image, tag, (tagnum+1), numoftags)
+      bufferofimgs.append(image + ":" + tag)
+      tagnum = tagnum + 1
+    else:
+      print("[%s:%s] Skipping image! Image already in the local repository" % (image, tag))
+      tagnum = tagnum + 1	
+  for item in bufferofimgs:
+    print "[%s] removing image of the local/remote repository" % (item)
+    if(docker.removeRemoteImage(item)):
+      exit()
+    if(docker.removeLocalImage(item)):
+      exit() 
+
+
+thread_list = []
+opts ,args = getopt.getopt(sys.argv[1:],'c,h',['config-file=', 'help'])
+config_file = ''
+help = ''
+
+for opt, arg in opts:
+  if (opt in "--config-file="):
+    config_file = arg
+  elif (opt in "--help"):
+    local_help()
+
+properties = yaml.load(open(config_file))
+
+for i in properties['images']:
+  t = threading.Thread(target=process_image, args=(i,))
+  thread_list.append(t)
+
+for thread in thread_list:
+    thread.start()
+
+for thread in thread_list:
+    thread.join()      
