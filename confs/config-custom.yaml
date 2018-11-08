@@ -1,0 +1,214 @@
+local-url: registry.sulamerica.br:5000
+images:
+  openshift3/apb-base:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/apb-tools:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/automation-broker-apb:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/csi-attacher:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/csi-driver-registrar:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/csi-livenessprobe:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/csi-provisioner:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/grafana:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/image-inspector:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/mariadb-apb:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/mediawiki:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/mediawiki-apb:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/mysql-apb:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-ansible:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-ansible-service-broker:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-cli:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-cluster-autoscaler:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-cluster-capacity:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-cluster-monitoring-operator:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-console:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-configmap-reloader:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-control-plane:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-deployer:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-descheduler:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-docker-builder:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-docker-registry:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-efs-provisioner:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-egress-dns-proxy:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-egress-http-proxy:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-egress-router:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11" 
+  openshift3/ose-haproxy-router:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-hyperkube:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-hypershift:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-keepalived-ipfailover:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-kube-rbac-proxy:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-kube-state-metrics:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-metrics-server:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-node:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-node-problem-detector:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-operator-lifecycle-manager:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-pod:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-prometheus-config-reloader:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-prometheus-operator:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-recycler:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-service-catalog:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-template-service-broker:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-egress-http-proxy:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/ose-web-console:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/postgresql-apb:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/registry-console:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/snapshot-controller:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  openshift3/snapshot-provisioner:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.11"
+  rhel7/etcd:
+    remote-url: registry.redhat.io
+    version: 2
+    tag: "3.2.22"

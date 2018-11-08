@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
-import urllib2
 import json
+import requests
 import subprocess
 
 class Docker:
@@ -13,8 +13,9 @@ class Docker:
   	self.remoteURL = remoteURL
   	self.localURL = localURL
   	self.imageName = imageName
+        requests.packages.urllib3.disable_warnings()
 
-  def setCurrentTag(self,tagNumber):
+  def setTag(self,tagNumber):
     self.tagNumber = tagNumber
 
   def fetchImage(self):
@@ -37,22 +38,18 @@ class Docker:
   	errcode = subprocess.call(["docker","rmi","-f",(self.localURL + "/" + imageNameandTagNumber)], stdout=self.FNULL, stderr=subprocess.STDOUT)
   	return errcode	
 
-  def getTags(self, URL, version):
+  def getTags(self, URL):
     try:
-      if(version == 1):
-        url = 'https://' + URL + '/v1/repositories/' + self.imageName + '/tags'
-        return json.load(urllib2.urlopen(url))
-      elif(version == 2):
-        url =  'https://' + URL + '/v2/' + self.imageName + '/tags/list'
-        return json.load(urllib2.urlopen(url))
-    except urllib2.HTTPError, e:
-      return e.code 
+      url = 'https://' + URL + '/v2/' + self.imageName + '/tags/list'
+      r = requests.get(url, allow_redirects=True)
+      return r.json()
+    except requests.exceptions.RequestException as e:
+      return e
 
   def imageExists(self, tagNumber):
   	url = self.localURL
-  	result = self.getTags(url, 2)
-  	if (type(result) is not int):
-  		for tagLocal in (self.getTags(url, 2))['tags']:
-  			if ((tagNumber == tagLocal) and (tagNumber != 'latest')):
-  				return True
+  	result = self.getTags(url)
+        for tagLocal in (self.getTags(url))['tags']:
+  	   if ((tagNumber == tagLocal) and (tagNumber != 'latest')):
+  	      return True
   	return False
